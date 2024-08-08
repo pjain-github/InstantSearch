@@ -116,3 +116,13 @@ class Pinecone_db:
 
         #Logging
         logging.info(f"Index deleted in pinecone with name {index_name}")
+
+    def reset_index(self, index_name):
+        """
+        Reset the specified Pinecone index.
+
+        Args:
+            index_name: The name of the index to delete.
+        """
+        self.delete_index(index_name)
+        self.create_index(index_name = index_name)

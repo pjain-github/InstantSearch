@@ -36,7 +36,7 @@ def get_data(index_name="temp-index", query="All"):
 
 # delete_index()
 # create_new_index() 
-get_data()
+# get_data()
 #clean_folder("Data")
 
 

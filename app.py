@@ -1,5 +1,5 @@
 import streamlit as st
-from main import streaming_instant_search
+from main import streaming_instant_search, reset_index
 from extractor import Database
 import os
 import tempfile
@@ -80,6 +80,15 @@ with st.sidebar:
                 Database(path = url, pinecone_api_key=pinecone_api_key, google_api_key=google_api_key, openai_api_key=openai_api_key)
                 st.write(f"File downloaded from {url} and saved to Data folder.")
 
+    if st.button('Reset Database'):
+        reset_successful = reset_index(pinecone_api_key=pinecone_api_key, openai_api_key=openai_api_key, google_api_key=google_api_key)
+        if reset_successful:
+            st.write('Data base reset successful')
+        else:
+            st.write('Data reset failed')
+    else:
+        st.write('Button not clicked yet.')
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -90,7 +99,7 @@ for message in st.session_state.messages:
 if prompt := st.chat_input("What is up?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
-        st.markdown(prompt)
+        st.markdown(prompt, unsafe_allow_html=True)
 
     # Display assistant's message as it streams
     with st.chat_message("assistant"):
@@ -111,9 +120,9 @@ if prompt := st.chat_input("What is up?"):
         for chunk in response:
             if chunk:
                 streamed_text += chunk  # Accumulate the chunk
-                message_placeholder.markdown(streamed_text)  # Update placeholder with streamed content
+                message_placeholder.markdown(streamed_text, unsafe_allow_html=True)  # Update placeholder with streamed content
                 complete_response += chunk
             else:
-                message_placeholder.markdown("Received empty chunk.")  # Handle empty chunks (optional)
+                message_placeholder.markdown("Received empty chunk.", unsafe_allow_html=True)  # Handle empty chunks (optional)
     st.session_state.messages.append({"role": "assistant", "content": complete_response})
 
