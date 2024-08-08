@@ -3,7 +3,6 @@ from main import streaming_instant_search
 from extractor import Database
 import os
 import tempfile
-import env
 from dotenv import load_dotenv
 
 load_dotenv()
