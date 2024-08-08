@@ -1,0 +1,15 @@
+langchain
+langchain
+langchain-google-genai
+langchain_openai
+langchain_pinecone
+langchain-community
+langchain-core
+python-docx
+tiktoken
+PyMuPDF
+langchain_text_splitters
+streamlit
+BeautifulSoup4
+pytest
+python-dotenv

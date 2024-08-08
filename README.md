@@ -1,2 +1,1 @@
-# InstantSearch
-An AI search engine to run on your files
+Project Overview - Chatbot to upload documents and connect your documents to LLM
